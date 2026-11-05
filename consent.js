@@ -4,6 +4,7 @@
    Este archivo NO toca el formulario ni /api/lead: solo escucha el envío para medirlo. */
 (function () {
   var GOOGLE_ADS_ID = 'AW-18558359110';
+  var GOOGLE_ADS_LEAD = 'AW-18558359110/nMFiCN6w5rIdEMasqJFF'; // Conversión "Lead formulario web"
   var META_PIXEL_ID = '2172475516685413'; // Píxel de Meta (conjunto de datos "Suricato")
   var KEY = 'sc_cookies'; // 'si' | 'no'
 
@@ -34,8 +35,12 @@
 
   // Mide cuando alguien deja su email en el formulario (sin modificarlo).
   document.addEventListener('submit', function (e) {
-    if (!e.target || e.target.id !== 'lead-form' || get() !== 'si') return;
-    try { if (window.gtag) gtag('event', 'generate_lead'); } catch (err) {}
+    var f = e.target;
+    if (!f || f.id !== 'lead-form' || get() !== 'si') return;
+    // Solo cuenta si el formulario está bien rellenado (nombre, email válido y casilla de privacidad).
+    var n = f.querySelector('#lead-name'), m = f.querySelector('#lead-email'), ok = f.querySelector('#lead-ok');
+    if (!n || !n.value.trim() || !m || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.value.trim()) || !ok || !ok.checked) return;
+    try { if (window.gtag) gtag('event', 'conversion', { send_to: GOOGLE_ADS_LEAD }); } catch (err) {}
     try { if (window.fbq) fbq('track', 'Lead'); } catch (err) {}
   }, true);
 
