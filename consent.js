@@ -4,7 +4,7 @@
    Este archivo NO toca el formulario ni /api/lead: solo escucha el envío para medirlo. */
 (function () {
   var GOOGLE_ADS_ID = 'AW-18558359110';
-  var META_PIXEL_ID = ''; // pega aquí el ID del píxel de Meta cuando lo tengas (solo números)
+  var META_PIXEL_ID = '2172475516685413'; // Píxel de Meta (conjunto de datos "Suricato")
   var KEY = 'sc_cookies'; // 'si' | 'no'
 
   function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
