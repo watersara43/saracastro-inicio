@@ -42,7 +42,7 @@
     z-index: 1;
     max-width: 740px;
     margin: 0 auto;
-    padding-block: 56px 64px;
+    padding-block: clamp(48px, 10vw, 80px) clamp(60px, 10vw, 100px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -281,7 +281,7 @@
 
   function resize() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = document.documentElement.scrollHeight;
     draw();
   }
 
@@ -373,6 +373,7 @@
   }
 
   window.addEventListener('resize', resize);
+  document.addEventListener('scroll', function() { resize(); }, { passive: true });
   resize();
 })();
 </script>
