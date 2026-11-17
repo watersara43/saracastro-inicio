@@ -246,7 +246,7 @@
     </p>
   </div>
 
-  <div class="video-wrap">
+  <div class="video-wrap" hidden>
     <!-- Sustituye por: <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0" allowfullscreen></iframe> -->
     <div class="video-placeholder">
       <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
@@ -281,7 +281,7 @@
 
   function resize() {
     canvas.width = window.innerWidth;
-    canvas.height = Math.max(window.innerHeight, document.documentElement.scrollHeight);
+    canvas.height = window.innerHeight;
     draw();
   }
 
