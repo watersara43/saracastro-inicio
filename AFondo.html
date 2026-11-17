@@ -221,39 +221,29 @@
   footer a:hover { color: rgba(255,255,255,0.9); }
 
   @media (max-width: 520px) {
-    /* Oscurecer el canvas para que las letras dominen */
-    .bg-canvas { opacity: 0.35; }
-    /* Overlay oscuro sobre el canvas */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(10,30,5,0.72) 0%, rgba(10,30,5,0.55) 60%, rgba(10,30,5,0.72) 100%);
-      z-index: 0;
-      pointer-events: none;
+    /* En móvil: canvas invisible, fondo sólido oscuro tipo saracastro.es */
+    .bg-canvas { display: none; }
+    body {
+      background: #0d1f07;
     }
     .page {
-      position: relative;
-      z-index: 1;
-      padding-block: 20px 28px;
-      padding-inline: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding-block: 32px 40px;
+      padding-inline: 24px;
     }
-    .logo-wrap { margin-bottom: 10px; }
-    .logo-img { height: 90px; }
-    .pill { font-size: 0.88rem; padding: 8px 16px 8px 10px; margin-bottom: 14px; }
+    .logo-wrap { margin-bottom: 14px; }
+    .logo-img { height: 100px; }
+    .pill { font-size: 0.88rem; padding: 8px 16px 8px 10px; margin-bottom: 16px; }
     .headline {
-      font-size: clamp(3.2rem, 15vw, 4.2rem);
-      letter-spacing: -0.04em;
-      line-height: 1.0;
-      margin-bottom: 16px;
+      font-size: clamp(3rem, 14.5vw, 4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-bottom: 18px;
     }
-    .sub { font-size: clamp(1.1rem, 4.8vw, 1.3rem); margin-bottom: 24px; line-height: 1.4; }
-    .cta { font-size: 1.15rem; padding: 20px 24px; width: 100%; text-align: center; }
+    .sub { font-size: clamp(1.05rem, 4.5vw, 1.2rem); margin-bottom: 28px; line-height: 1.45; }
+    .cta { font-size: 1.1rem; padding: 20px 24px; width: 100%; text-align: center; }
     .note { margin-top: 14px; }
     .video-wrap { border-radius: 14px; }
+    footer { background: rgba(255,255,255,0.05); }
   }
 </style>
 
@@ -272,7 +262,7 @@
 
   <div class="headline-wrap">
     <h1 class="headline">
-      Lleva tus <em>ventas</em><br>al siguiente<br>nivel
+      Lleva tus <em>ventas</em><br>al siguiente nivel<br>como consecuencia<br>de liderarte
     </h1>
     <p class="sub">
       Sin guiones complejos, sin fórmulas para rebatir objeciones<br>y sin urgencias inventadas.
