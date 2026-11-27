@@ -206,6 +206,61 @@
   }
   .note-dot { width: 6px; height: 6px; border-radius: 50%; background: #d4f0a0; flex-shrink: 0; }
 
+  /* Countdown */
+  .countdown-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .countdown-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .countdown {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+  }
+  .cd-block {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .cd-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #d4f0a0;
+    line-height: 1;
+    min-width: 2ch;
+    text-align: center;
+  }
+  .cd-unit {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+  .cd-sep {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.3);
+    line-height: 1;
+    padding-bottom: 4px;
+  }
+
   /* Footer */
   footer {
     margin-top: 56px;
@@ -292,37 +347,41 @@
 
   <div class="pill">
     <span class="pill-dot"></span>
-    Para closers y emprendedoras que ya venden
+    Black Friday · Solo hasta el 29 de noviembre
   </div>
 
   <div class="headline-wrap">
     <h1 class="headline">
-      Lleva tus <em>ventas</em> <br>al siguiente nivel <br>como consecuencia <br>de liderarte
+      Este Black Friday<br>no hago rebajas,<br><em>subo el nivel</em>
     </h1>
     <p class="sub">
-      Sin guiones complejos, sin fórmulas para rebatir objeciones <br>y sin urgencias inventadas.
+      Accede ahora a A Fondo con un precio, formato<br>y bonos totalmente nuevos y exclusivos.
     </p>
   </div>
 
-  <div class="video-wrap" hidden>
-    <!-- Sustituye por: <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0" allowfullscreen></iframe> -->
-    <div class="video-placeholder">
-      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
-        <circle cx="26" cy="26" r="24" stroke="white" stroke-width="1.5" opacity="0.5"/>
-        <polygon points="21,18 38,26 21,34" fill="white" opacity="0.5"/>
-      </svg>
-      Vídeo próximamente
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/BtiRRCCX9bU?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
+  </div>
+
+  <div class="countdown-wrap">
+    <p class="countdown-label">La oferta desaparece en</p>
+    <div class="countdown" id="countdown">
+      <div class="cd-block"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">h</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">m</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">s</span></div>
     </div>
   </div>
 
-  <a href="https://wa.me/34694283962?text=Hola%20Sara%2C%20vengo%20de%20la%20landing%20A%20Fondo%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n" class="cta" data-lead="whatsapp" target="_blank" rel="noopener">
-    Quiero llevar mis ventas a Fondo
+  <a href="https://wa.me/34694283962?text=Hola%20Sara%2C%20vengo%20del%20v%C3%ADdeo%20Black%20Friday%20y%20quiero%20estar%20dentro%20de%20A%20Fondo" class="cta" data-lead="whatsapp" target="_blank" rel="noopener">
+    Escríbeme al WhatsApp si quieres estar dentro
     <span class="cta-arrow">↗</span>
   </a>
 
   <div class="note">
     <span class="note-dot"></span>
-    Plazas muy limitadas
+    Oferta válida hasta el 29/11 a las 00:00
   </div>
 
   <footer>
@@ -439,5 +498,34 @@
 })();
 </script>
 <script src="/lead.js" defer></script>
+<script>
+  (function() {
+    // Cuenta atrás hasta 29 noviembre 2026 a las 00:00 hora Madrid
+    var deadline = new Date('2026-11-29T00:00:00+01:00').getTime();
+    var h = document.getElementById('cd-h');
+    var m = document.getElementById('cd-m');
+    var s = document.getElementById('cd-s');
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var now = Date.now();
+      var diff = deadline - now;
+      if (diff <= 0) {
+        if (h) h.textContent = '00';
+        if (m) m.textContent = '00';
+        if (s) s.textContent = '00';
+        return;
+      }
+      var totalSec = Math.floor(diff / 1000);
+      var ss = totalSec % 60;
+      var mm = Math.floor(totalSec / 60) % 60;
+      var hh = Math.floor(totalSec / 3600);
+      if (h) h.textContent = pad(hh);
+      if (m) m.textContent = pad(mm);
+      if (s) s.textContent = pad(ss);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 </body>
 </html>
